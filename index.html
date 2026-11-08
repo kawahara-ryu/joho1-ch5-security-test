@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>暗号怪盗とパリティ探偵 〜情報セキュリティ＆誤り検出テスト〜 | 高校情報I 教材</title>
+  <meta name="description" content="高校情報I 第5章「暗号・パリティ・マルウェア」対策テストアプリ。共通鍵・公開鍵暗号、シーザー暗号、デジタル署名、パリティビット、マルウェア分類を極秘捜査ボードで完全攻略！">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;900&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 黄色×黒 警察鑑識 KEEP OUT 規制線テープ -->
+  <div class="crime-scene-tape" aria-hidden="true">
+    <span>⚠️ KEEP OUT // CYBER FORENSIC INVESTIGATION // 暗号怪盗対策本部・パリティ鑑識課 // DO NOT CROSS ⚠️ KEEP OUT // CYBER FORENSIC INVESTIGATION ⚠️</span>
+  </div>
+
+  <div id="app" class="app-container">
+    <!-- ヘッダー（極秘捜査本部コンソール） -->
+    <header class="app-header">
+      <div class="header-brand">
+        <span class="brand-badge">🕵️‍♂️ 捜査本部 FILE: CH5-SEC</span>
+        <h1 class="header-title">
+          <span class="u-title-chunk">暗号怪盗と</span>
+          <span class="u-title-chunk">パリティ探偵</span>
+        </h1>
+      </div>
+      <div class="header-controls">
+        <button id="bgmToggleBtn" class="control-btn" title="BGM切替">
+          <span>🎵</span><span class="btn-text">BGM: OFF</span>
+        </button>
+        <button id="seToggleBtn" class="control-btn" title="効果音切替">
+          <span>🔇</span><span class="btn-text">SE: OFF</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- 画面1: タイトル画面（怪盗からの予告状 × 探偵のコルク捜査ボード） -->
+    <main id="titleScreen" class="screen active">
+      <div class="title-card noir-board-card">
+        <div class="confidential-stamp">TOP SECRET // 極秘捜査資料</div>
+
+        <h2 class="main-title">
+          <span class="u-title-chunk">真夜中の予告状と</span>
+          <span class="u-title-chunk">1ビットの証拠品</span>
+        </h2>
+        <p class="sub-title">高校情報I 第5章「暗号技術・デジタル署名・電子認証・パリティビット」対策演武</p>
+
+        <!-- 指名手配ポラロイド VS 鑑識バッジ対決ボード -->
+        <div class="hero-visual-wrap">
+          <div class="polaroid-card thief-polaroid">
+            <div class="pin-tack red-pin"></div>
+            <img src="delivery_cat.jpg" alt="暗号怪盗猫" class="hero-avatar">
+            <div class="polaroid-caption">WANTED: 暗号怪盗キャット</div>
+            <div class="polaroid-tag">手口: 盗聴・改ざん・なりすまし</div>
+          </div>
+
+          <div class="vs-laser-badge">VS</div>
+
+          <div class="polaroid-card detective-polaroid">
+            <div class="pin-tack gold-pin"></div>
+            <img src="detective_shiba.jpg" alt="パリティ探偵柴犬" class="hero-avatar shiba">
+            <div class="polaroid-caption">DETECTIVE: パリティ柴犬警部</div>
+            <div class="polaroid-tag">武器: 公開鍵・電子証明書・パリティ検視</div>
+          </div>
+        </div>
+
+        <!-- 怪盗の予告状 ＆ 探偵の捜査メモ 2カラム対決ボックス -->
+        <div class="duel-notes-grid">
+          <div class="calling-card-box">
+            <div class="note-header">🍷 【怪盗キャットからの予告状】</div>
+            <p>
+              「今夜、平文のまま流れる機密データと、ノイズまみれの通信回線をいただきに参上するニャ！<strong>シーザー暗号</strong>や<strong>偽の公開鍵によるなりすまし</strong>の罠を見破れるかな？」
+            </p>
+          </div>
+          <div class="detective-memo-box">
+            <div class="note-header">🔍 【柴犬警部の鑑識ブリーフィング】</div>
+            <p>
+              「怪盗の好きにはさせんワン！<strong>共通鍵・公開鍵・デジタル署名（要約値）・認証局(CA)の電子証明書・TLS</strong>で通信を守り、<strong>7ビット＋1ビットのパリティチェック</strong>で1ビットの反転も検挙するワン！」
+            </p>
+          </div>
+        </div>
+
+        <div class="spec-grid">
+          <div class="spec-item">
+            <span class="spec-icon">🍷</span>
+            <span class="spec-name">暗号解読＆デジタル署名</span>
+            <span class="spec-desc">共通鍵・公開鍵・シーザー暗号・要約値・CA・TLS</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-icon">🔬</span>
+            <span class="spec-name">7bit+1bit パリティ鑑識スコープ</span>
+            <span class="spec-desc">偶数/奇数パリティ付加・誤り検出・2ビット反転の限界</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-icon">📜</span>
+            <span class="spec-name">電子認証＆TLS通信</span>
+            <span class="spec-desc">要約値（ハッシュ）・認証局(CA)・電子証明書・HTTPS</span>
+          </div>
+        </div>
+
+        <button id="startBtn" class="primary-btn noir-start-btn">
+          <span>🚨 非常線を張って捜査開始！（全8事件へ挑む） ➔</span>
+        </button>
+      </div>
+    </main>
+
+    <!-- 画面2: クイズ＆フォレンジックHUD画面（左右2カラム捜査デスク） -->
+    <main id="quizScreen" class="screen">
+      <div class="quiz-layout">
+        <!-- 左側: 事件調書ファイルカード -->
+        <div class="quiz-main-card">
+          <div class="case-file-tab">📁 CASE FILE // 証拠物件調書</div>
+          <div class="progress-header">
+            <span class="progress-text" id="progressText">第 1 問 / 全 8 問</span>
+            <span class="score-badge" id="scoreBadge">捜査スコア: 0 点</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+
+          <span class="q-category-tag" id="qCategoryTag">暗号方式</span>
+          <h2 class="q-title" id="qTitle">問題文が読み込まれます...</h2>
+
+          <div class="options-grid" id="optionsContainer">
+            <button class="option-btn" data-index="0">
+              <span class="opt-prefix">ア</span>
+              <span class="opt-text">選択肢ア</span>
+            </button>
+            <button class="option-btn" data-index="1">
+              <span class="opt-prefix">イ</span>
+              <span class="opt-text">選択肢イ</span>
+            </button>
+            <button class="option-btn" data-index="2">
+              <span class="opt-prefix">ウ</span>
+              <span class="opt-text">選択肢ウ</span>
+            </button>
+            <button class="option-btn" data-index="3">
+              <span class="opt-prefix">エ</span>
+              <span class="opt-text">選択肢エ</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 右側: 暗視フォレンジック鑑識スコープ -->
+        <div class="hud-card">
+          <div class="hud-header">
+            <span class="hud-title" id="hudTitle">🔬 鑑識フォレンジック・スコープ</span>
+            <span class="hud-status-badge" id="hudStatusBadge">ANALYZING</span>
+          </div>
+
+          <div class="hud-canvas-wrap">
+            <canvas id="hudCanvas"></canvas>
+          </div>
+
+          <div class="hud-info-box" id="hudInfoBox">
+            暗号＆パリティ鑑識ログ
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- 画面3: リザルト画面 -->
+    <main id="resultScreen" class="screen">
+      <div class="result-card">
+        <div class="confidential-stamp">CASE CLOSED // 捜査完了報告書</div>
+        <div class="result-rank-circle">
+          <span class="rank-char" id="rankChar">S</span>
+          <span class="rank-title" id="rankTitle">鉄壁のサイバー特級探偵</span>
+        </div>
+
+        <div class="result-score-row">
+          <div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">総合得点</div>
+            <div class="result-score-val" id="resultScore">100 点</div>
+          </div>
+          <div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">検挙数（正答数）</div>
+            <div class="result-score-val" id="resultCorrect">8 / 8 問</div>
+          </div>
+          <div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">解決率</div>
+            <div class="result-score-val" id="resultRate">100 %</div>
+          </div>
+        </div>
+
+        <!-- 永続合言葉カード -->
+        <div class="secret-word-card">
+          <div style="font-size: 0.85rem; color: var(--detective-yellow); font-weight: 700;">
+            🔑 Google Classroomの解答に以下の「あいことば」を入力してください。
+          </div>
+          <div class="secret-word-box">
+            <span class="secret-word" id="secretWord">秘密鍵を靴下に隠して洗濯された怪盗</span>
+            <button id="copyWordBtn" class="copy-btn">📋 合言葉をコピー</button>
+          </div>
+          <div style="font-size: 0.75rem; color: var(--text-muted);">
+            ※提出フォームに貼り付けて送信してください。
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+          <button id="openReviewBtn" class="control-btn" style="padding: 12px 24px; border-color: var(--thief-magenta);">
+            <span>📁</span><span>全8事件・鑑識復習ファイル</span>
+          </button>
+          <button id="restartBtn" class="primary-btn" style="padding: 12px 28px;">
+            <span>🔄</span><span>もう一度捜査に挑む</span>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- モーダル1: 正誤判定＆解説 -->
+    <div id="answerModal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="judge-header">
+          <span class="judge-icon" id="judgeIcon">⭕</span>
+          <h3 class="judge-title correct" id="judgeTitle">検挙成功！（正解）</h3>
+        </div>
+
+        <div class="ans-detail-box">
+          <div class="ans-label">【鑑識確定解答】</div>
+          <div class="ans-value" id="modalCorrectAnswer">ア：選択肢テキスト</div>
+        </div>
+
+        <div class="explanation-card" id="modalExplanation">
+          ここに解説が表示されます。
+        </div>
+
+        <div style="text-align: right;">
+          <button id="nextQuestionBtn" class="primary-btn" style="padding: 12px 28px; font-size: 1rem;">
+            <span>次の事件ファイルへ ➔</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- モーダル2: 全問復習演武録 -->
+    <div id="reviewModal" class="modal-overlay">
+      <div class="modal-content review-modal-box">
+        <div class="review-modal-header">
+          <h3 style="font-size: 1.15rem; font-weight: 900; color: var(--detective-yellow);">
+            📁 全8事件・極秘鑑識復習ファイル（クリックで証拠詳細）
+          </h3>
+          <button id="closeReviewBtn" class="close-btn" title="閉じる">✕</button>
+        </div>
+
+        <div class="review-layout">
+          <div class="review-list-col" id="reviewItemList"></div>
+          <div class="review-detail-col" id="reviewDetailCol"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- フッター (教訓19: 純化表記) -->
+    <footer class="app-footer">
+      <p class="footer-credit">BGM: 魔王魂</p>
+    </footer>
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
